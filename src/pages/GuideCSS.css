@@ -1,0 +1,38 @@
+.guideContainer {
+  background-color: lightyellow;
+  text-align: left;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.Title {
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+}
+
+.Section {
+  font-size: 1.3rem;
+  margin-bottom: 0.5em;
+}
+
+.Image {
+  max-width: 80%;
+  margin-bottom: 1em;
+}
+
+.ImageSmall {
+  max-width: 30%;
+  margin-bottom: 1em;
+}
+
+.Label {
+  color: red;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.Example {
+  color: gray;
+  padding-left: 5px;
+}
