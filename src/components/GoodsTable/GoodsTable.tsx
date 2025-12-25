@@ -19,7 +19,7 @@ function GoodsTable() {
       sm: "repeat(2, 1fr)",     // 小さめタブレット: 3列
       md: "repeat(3, 1fr)",     // タブレット: 4列
       lg: "repeat(4, 1fr)",     // PC: 5列
-      xl: "repeat(5, 1fr)",     // 大きな画面: 6列
+      xl: "repeat(6, 1fr)",     // 大きな画面: 6列
     }}
     p={"2vw"}>
       {cards.map((card) => (

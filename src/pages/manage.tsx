@@ -8,7 +8,7 @@ export default function Manage() {
   const isNarrow = useIsNarrow();
   return (
     <Box height="80vh" overflow="hidden"
-      width={isNarrow ? "100%" : "100%"}>
+      width={"100%"}>
       <Stack height={"80vh"}>
         <DetailSearch />
         <Box flex="1" height={"100%"} background={"orange.100"} overflowX={"auto"}>

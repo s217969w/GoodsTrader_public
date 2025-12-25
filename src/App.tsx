@@ -17,19 +17,23 @@ function App() {
     <>
       <ChakraProvider value={defaultSystem}>
         {isNarrow ? (
-          <Stack width={"100%"} px={0}>
+          <div style={{display:"flex", flexDirection:"column"}}>
             <BrowserRouter>
-              <MobileHeader />
+            <MobileHeader />
               <Router />
             </BrowserRouter>
-          </Stack>
+          </div>
         ) : (
-          <HStack gap={0} width="70vw" position="relative">
+          <div style={{display:"flex", flexDirection:"row"}}>
             <BrowserRouter>
-              <SideMenu />
+            <div style={{width:SIDEBAR_WIDTH, height:"100vh", backgroundColor:"blue.50"}}>
+                <SideMenu />
+            </div>
+            <div style={{width:"max(90vw, 100vw - 180px)", height:"100vh", padding:"30px"}}>
               <Router />
+            </div>
             </BrowserRouter>
-          </HStack>
+          </div>
         )}
 
       </ChakraProvider >

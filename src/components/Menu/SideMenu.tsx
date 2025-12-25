@@ -16,18 +16,7 @@ export default function SideMenu() {
   ]
   const currentpath = useLocation().pathname;
   return (
-    <Box
-      position={"fixed"}
-      left={0}
-      top={0}
-      height="100vh"
-      width="10vw"
-      minW={"180px"}
-      bg="blue.50"
-      boxShadow="md"
-      zIndex={100}
-      as={"aside"}
-    >
+    <div>
       <Stack minW={"180px"} width={"10vw"} height={"100vh"}>
         <Link to={"/"} key={"/"}>
           <Box
@@ -61,7 +50,7 @@ export default function SideMenu() {
           </Link>
         ))}
       </Stack>
-    </Box>
+    </div>
 
   )
 }
