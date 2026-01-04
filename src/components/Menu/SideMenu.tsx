@@ -4,7 +4,7 @@ import { BsQrCode, BsQuestionCircle, BsRepeat } from "react-icons/bs";
 import { TbCards } from "react-icons/tb";
 import { Link, useLocation } from "react-router-dom";
 
-
+// レガシー
 export default function SideMenu() {
 
   const menuItems = [
