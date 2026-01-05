@@ -2,6 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import GoodsElement from './GoodsElement.tsx'
 import { useCards } from '../../utils/storage.ts';
 import type { CardInfo } from '../../data/cardinfo.ts';
+import { useWindowSize } from '../../utils/useWindowSize.ts';
 
 function GoodsTable() {
 
@@ -13,21 +14,32 @@ function GoodsTable() {
       card.id === id ? { ...card, ...updates } : card);
     saveCards(updated);
   }
+
+  const { width } = useWindowSize();
+  const col = Math.max(1, Math.floor((width - 50) / 180));
+  const cardWidth = width / col;
   return (
-    <Grid gap={8}
-    templateColumns={{
-      sm: "repeat(2, 1fr)",     // 小さめタブレット: 3列
-      md: "repeat(3, 1fr)",     // タブレット: 4列
-      lg: "repeat(4, 1fr)",     // PC: 5列
-      xl: "repeat(6, 1fr)",     // 大きな画面: 6列
-    }}
-    p={"2vw"}>
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        padding: '20px',
+        boxSizing: 'border-box',
+        width: '100%'
+      }}
+    >
       {cards.map((card) => (
-        <GridItem colSpan={1} key={card.id}>
-          <GoodsElement card={card} updateCard={updateCard} />
-        </GridItem>
+        <div key={card.id}
+          style={{
+            width: cardWidth,
+            boxSizing: 'border-box',
+            flex: `0 0 ${cardWidth}`
+          }}
+        >
+          <GoodsElement card={card} updateCard={updateCard} cardWidth={cardWidth} />
+        </div>
       ))}
-    </Grid>
+    </div>
   )
 }
 

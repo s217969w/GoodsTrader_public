@@ -12,78 +12,88 @@ import DetailDrawer from './detailDrawer.tsx';
 interface GoodsProps {
   card: CardInfo;
   updateCard: (id: string, updates: Partial<CardInfo>) => void;
+  cardWidth: number;
 }
 
-function GoodsElement({ card, updateCard }: GoodsProps) {
+function GoodsElement({ card, updateCard, cardWidth }: GoodsProps) {
 
 
   return (
-    <Stack width={"9vw"}>
-      <Field.Root>
-      <Center>
-        <DetailDrawer card={card} updateCard={updateCard} />
-      </Center>
-        <Field.Label color={"blue.300"}>所持数</Field.Label>
-        <Center>
-          <HStack gap="3" p={2}>
-            <Button
-              variant="outline"
-              width={["48px", "3vw"]}
-              height={["32px", "2vw"]}
-              aspectRatio={1.5}
-              background={"pink.200"}
-              onClick={() => updateCard(card.id, { owned: card.owned - 1 })}
-              disabled={card.owned === 0}
-            >
-              -
-            </Button>
-            {card.owned}
-            <Button
-              variant="outline"
-              width={["48px", "3vw"]}
-              height={["32px", "2vw"]}
-              aspectRatio={1}
-              background={"blue.200"}
-              onClick={() =>
-                updateCard(card.id, { owned: card.owned + 1 })
-              }
-              disabled={card.owned === 99}
-            >
-              +
-            </Button>
-          </HStack>
-        </Center>
-      </Field.Root>
-      <Field.Root>
-        <Field.Label color={"green.300"}>ほしい</Field.Label>
-        <Center>
-          <HStack gap="3" p={2}>
-            <Button
-              variant="outline"
-              width={["48px", "3vw"]}
-              height={["32px", "2vw"]}
-              aspectRatio={1}
-              onClick={() => updateCard(card.id, { want: card.want - 1 })}
-              disabled={card.want === 0 || card.unlimited}
-            >
-              -
-            </Button>
-            {card.unlimited ? "∞" : (card.want)}
-            <Button
-              variant="outline"
-              width={["48px", "3vw"]}
-              height={["32px", "2vw"]}
-              aspectRatio={1}
-              background={"green.200"}
-              onClick={() => updateCard(card.id, { want: card.want + 1 })}
-              disabled={card.want === 99 || card.unlimited}
-            >
-              +
-            </Button>
-          </HStack>
-        </Center>
-      </Field.Root>
-    </Stack>
+    <div style={{
+      width: cardWidth,
+      display: "flex",
+      flexDirection: "column",
+      padding: "25px"
+    }}>
+      <DetailDrawer card={card} updateCard={updateCard} />
+      <div style={{ color: "#0099ffff", textAlign: "left" }}>所持数</div>
+      <div style={{
+        textAlign: "center",
+        padding: "2px",
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+        gap: "5px"
+      }}>
+        <Button
+          width={"30%"}
+          variant="outline"
+          aspectRatio={1.5}
+          background={"pink.200"}
+          onClick={() => updateCard(card.id, { owned: card.owned - 1 })}
+          disabled={card.owned === 0}
+        >
+          -
+        </Button>
+        <div
+          style={{ width: "40%", padding: "8px" }}
+        >{card.owned}</div>
+        <Button
+          width={"30%"}
+          variant="outline"
+          aspectRatio={1.5}
+          background={"blue.200"}
+          onClick={() =>
+            updateCard(card.id, { owned: card.owned + 1 })
+          }
+          disabled={card.owned === 99}
+        >
+          +
+        </Button>
+      </div>
+      <div style={{ color: "#00bd2fff", textAlign: "left" }}>ほしい</div>
+      <div style={{
+        textAlign: "center",
+        padding: "2px",
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+        gap: "5px"
+      }}>
+        <Button
+          width={"30%"}
+          variant="outline"
+          aspectRatio={1.5}
+          onClick={() => updateCard(card.id, { want: card.want - 1 })}
+          disabled={card.want === 0}
+        >
+          -
+        </Button>
+        <div
+          style={{ width: "40%", padding: "8px" }}
+        >{card.unlimited ? "∞" : (card.want)}</div>
+        <Button
+          width={"30%"}
+          variant="outline"
+          aspectRatio={1.5}
+          background={"green.200"}
+          onClick={() => updateCard(card.id, { want: card.want + 1 })}
+          disabled={card.want === 99 || card.unlimited}
+        >
+          +
+        </Button>
+      </div>
+    </div>
   )
 }
 
