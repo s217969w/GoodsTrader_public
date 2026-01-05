@@ -5,7 +5,6 @@ import type { ArrElement, QRDataProp } from "./QRInterface.ts";
 
 interface formprop {
   name: string,
-  usage: string,
 }
 
 
@@ -50,7 +49,6 @@ export default function QRDataMake(prop: formprop) {
   // QRコードに埋め込むデータ
   const qrData : QRDataProp = {
     n: prop.name,
-    u: prop.usage,
     c: cardsArr,
   };
 

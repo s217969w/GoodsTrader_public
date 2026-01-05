@@ -1,0 +1,12 @@
+{
+    "series" :[
+        {
+            "name": "ダミーサンプル",
+            "img": "/pic/icon/dummy.png"
+        },
+        {
+            "name": "A",
+            "img": "/pic/icon/A.png"
+        }
+    ]
+}

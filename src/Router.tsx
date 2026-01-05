@@ -14,14 +14,10 @@ export default function Router() {
   const isNarrow = useIsNarrow();
   return (
     <Routes>
-      <Route path="/manage" element={<Manage />} />
+      <Route path="/" element={<Manage />} />{/*デフォルト */}
       <Route path="/trade" element={<Trade />} />
       <Route path="/trade/propose" element={<ProposePage />} />
-      <Route path="/load" element={<Load />} />
-      <Route path="/load/confirm" element={<Confirm />} />
-      <Route path="/qr" element={<QR />} />
       <Route path="/about" element={isNarrow ? <MobileGuide /> : <Guide />} />
-      <Route path="/" element={<Portal />} /> {/* デフォルト */}
       <Route path="*" element={<div>404 not found</div>} />
     </Routes>
   );
