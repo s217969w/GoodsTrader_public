@@ -1,7 +1,6 @@
-import { MdMail, MdQrCode } from "react-icons/md"
+import MdMail from "react-icons/md"
 import styles from "./TraderHeader.module.css";
 import { IconButton } from "@chakra-ui/react";
-import { BsQrCode } from "react-icons/bs";
 import QRModal from "../QR/QRModal";
 import { Link } from "react-router-dom";
 import UserPullDown from "./UserPullDown";

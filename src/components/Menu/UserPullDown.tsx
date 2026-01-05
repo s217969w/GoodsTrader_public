@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./UserPullDown.module.css";
-import { BsArrowDown, BsMenuDown, BsQrCode, BsQuestionCircle } from "react-icons/bs";
+import BsQuestionCircle from "react-icons/bs";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import TradeModal from "../trade/TradeModal";
 

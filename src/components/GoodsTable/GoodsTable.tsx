@@ -1,4 +1,3 @@
-import { Grid, GridItem } from '@chakra-ui/react'
 import GoodsElement from './GoodsElement.tsx'
 import { useCards } from '../../utils/storage.ts';
 import type { CardInfo } from '../../data/cardinfo.ts';

@@ -1,5 +1,3 @@
-import { Stack } from "@chakra-ui/react";
-import DetailSearch from "../components/Filter/DetailSearch";
 import GoodsTable from "../components/GoodsTable/GoodsTable";
 import MobileList from "../components/GoodsTable/MobileList";
 import { useIsNarrow } from "../utils/useWindowSize";

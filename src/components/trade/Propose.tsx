@@ -16,6 +16,7 @@ export default function Propose() {
   let completeData: QRDataProp | null = null;
   let error = false;
   const stars = ["★", "★★", "★★★"]
+  const cardWidth = 70;
 
   try {
     if (location.state?.qr) {
@@ -153,90 +154,133 @@ export default function Propose() {
     )
   } else {
     return (
-      <Stack>
-        <Text fontSize={{ base: "xl", md: "2xl" }} fontWeight={"bold"}>
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+        padding: "20px"
+      }}>
+        <h1>
           おすすめ交換
-        </Text>
-        <HStack>
-            <Stack>
-                あなたから:
-        <Box
-            background={"pink.200"}
-            height={"70vh"}
-            p={5}
-            width={"35vw"}
-            overflowY={"auto"}
-          >
-            <Stack>
+        </h1>
+        <div style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "row",
+          gap: "30px"
+        }}>
+          <div style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden"
+          }}>
+            <div>あなたから:</div>
+            <div style={{
+              backgroundColor: "pink",
+              height: "100%",
+              width: "100%",
+              padding: "5px",
+              display: "flex",
+              flexDirection: "column",
+              overflow: "hidden"
+            }}
+            >
+
               {
                 [3, 2, 1].map((star) => (
-                  <Stack key={star}>
-                    <Text>おすすめ度: {stars[star - 1]}</Text>
-                    <Grid gap={4}
-                      templateColumns={"repeat(3, 1fr)"}
-                      p={"2vw"}
-                      width={"30vw"}
+                  <div key={star}>
+                    <div>おすすめ度: {stars[star - 1]}</div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        padding: '20px',
+                        gap: "10px",
+                        boxSizing: 'border-box',
+                        width: '100%'
+                      }}
                     >
                       {recommend?.give
                         .filter((card) => card.priority === star)
                         .map((card) => (
-                          <GridItem colSpan={1} key={card.id}>
-                            <Image
+                          <div style={{
+                            width: cardWidth,
+                            boxSizing: 'border-box',
+                            flex: `0 0 ${cardWidth}`
+                          }}>
+                            <img
                               alt={card.id}
                               src={`/pic/cards/${card.id}.png`}
-                              width={"8vw"}
                             />
-                          </GridItem>
+                          </div>
                         ))
                       }
-                    </Grid>
-                  </Stack>
+                    </div>
+                  </div>
                 ))
               }
-            </Stack>
-          </Box>
-          </Stack>
-            <Image alt={"LR"} src="/pic/arrow/LR.png" width={"3vw"} />
-          <Stack>
-            相手から:
-          <Box
-            background={"blue.200"}
-            height={"70vh"}
-            p={5}
-            width={"35vw"}
-            overflowY={"auto"}
-          >
-            <Stack>
+            </div>
+          </div>
+
+          <div style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column"
+          }}>
+            <div>相手から:</div>
+            <div style={{
+              backgroundColor: "cyan",
+              height: "100%",
+              width: "100%",
+              padding: "5px",
+              display: "flex",
+              flexDirection: "column",
+              overflow: "auto"
+            }}
+            >
+
               {
                 [3, 2, 1].map((star) => (
-                  <Stack key={star}>
-                    <Text>おすすめ度: {stars[star - 1]}</Text>
-                    <Grid gap={4}
-                      templateColumns={"repeat(3, 1fr)"}
-                      p={"2vw"}
-                      width={"30vw"}
+                  <div key={star}>
+                    <div>おすすめ度: {stars[star - 1]}</div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        padding: '20px',
+                        gap: "10px",
+                        boxSizing: 'border-box',
+                        width: '100%'
+                      }}
                     >
                       {recommend?.take
                         .filter((card) => card.priority === star)
                         .map((card) => (
-                          <GridItem colSpan={1} key={card.id}>
-                            <Image
+                          <div style={{
+                            width: cardWidth,
+                            boxSizing: 'border-box',
+                            flex: `0 0 ${cardWidth}`
+                          }}>
+                            <img
                               alt={card.id}
                               src={`/pic/cards/${card.id}.png`}
-                              width={"8vw"}
                             />
-                          </GridItem>
+                          </div>
                         ))
                       }
-                    </Grid>
-                  </Stack>
+                    </div>
+                  </div>
                 ))
               }
-            </Stack>
-          </Box>
-          </Stack>
-              </HStack>
-      </Stack>
+            </div>
+          </div>
+        </div>
+      </div >
     )
   }
 }

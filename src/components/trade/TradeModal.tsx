@@ -1,4 +1,4 @@
-import { Box, CloseButton, Dialog, Portal, Stack, Text, useDialog } from "@chakra-ui/react";
+import { CloseButton, Dialog, Portal, useDialog } from "@chakra-ui/react";
 import QRRead from "../QR/QRRead";
 import { BsQrCode } from "react-icons/bs";
 

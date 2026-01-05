@@ -1,7 +1,6 @@
 import { ChakraProvider, defaultSystem, HStack, Stack } from '@chakra-ui/react'
 import './App.css'
 
-import SideMenu from './components/Menu/SideMenu.tsx'
 import Router from './Router.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import MobileHeader from './components/Menu/MobileHeader.tsx'

@@ -1,8 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import ProposePage from "./pages/ProposePage.tsx";
-import Confirm from "./components/ImportData/ImportModal.tsx";
 import Manage from "./pages/manage.tsx";
-import Portal from "./pages/portal.tsx";
 import Guide from "./pages/Guide.tsx";
 import MobileGuide from "./pages/MobileGuide.tsx";
 import { useIsNarrow } from "./utils/useWindowSize.ts";

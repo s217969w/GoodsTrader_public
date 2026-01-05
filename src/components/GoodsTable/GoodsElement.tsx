@@ -1,10 +1,4 @@
-import {
-  HStack,
-  Stack,
-  Button,
-  Field,
-  Center,
-} from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import '../Filter/DetailSearch.tsx'
 import type { CardInfo } from '../../data/cardinfo.ts'
 import DetailDrawer from './detailDrawer.tsx';
