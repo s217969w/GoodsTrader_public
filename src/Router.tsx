@@ -1,8 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import QR from "./pages/QR.tsx";
-import Trade from "./pages/Trade.tsx";
 import ProposePage from "./pages/ProposePage.tsx";
-import Load from "./pages/Load.tsx";
 import Confirm from "./components/ImportData/ImportModal.tsx";
 import Manage from "./pages/manage.tsx";
 import Portal from "./pages/portal.tsx";
@@ -15,7 +12,6 @@ export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<Manage />} />{/*デフォルト */}
-      <Route path="/trade" element={<Trade />} />
       <Route path="/trade/propose" element={<ProposePage />} />
       <Route path="/about" element={isNarrow ? <MobileGuide /> : <Guide />} />
       <Route path="*" element={<div>404 not found</div>} />

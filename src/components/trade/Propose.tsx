@@ -34,7 +34,7 @@ export default function Propose() {
     error = true;
   }
 
-  if (error || completeData?.u === "L") {
+  if (error) {
     return (
       <Dialog.Root open={true}>
         <Portal>
@@ -46,7 +46,7 @@ export default function Propose() {
               </Dialog.Header>
               <Dialog.Body>
                 <p>
-                  QRコードを再度確認してください。交換用でないか、不正な形式です。
+                  不正な形式です。QRコードを再度確認してください。
                 </p>
               </Dialog.Body>
               <Dialog.Footer>

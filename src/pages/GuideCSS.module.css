@@ -2,10 +2,6 @@
   background-color: lightyellow;
   text-align: left;
   padding: 20px;
-  box-sizing: border-box;
-  width: max(80vw, 90vw - 180px);
-  height: 90vh;
-  overflow-y: scroll;
 }
 
 .Title {

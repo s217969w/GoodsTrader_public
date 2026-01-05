@@ -1,4 +1,4 @@
-import { Box, Button, Center, FileUpload, Stack, Text } from "@chakra-ui/react"
+import { Box, Button, Center, FileUpload, Stack, Text, UseDialogReturn } from "@chakra-ui/react"
 import { useState } from "react"
 import { HiCamera, HiUpload } from "react-icons/hi"
 import jsQR from "jsqr"
@@ -8,14 +8,14 @@ import { Scanner } from "@yudiel/react-qr-scanner"
 import { useIsNarrow } from "../../utils/useWindowSize"
 
 interface props {
-  usage: string;
+  dialog: UseDialogReturn;
 }
 
-export default function QRRead({ usage }: props) {
+export default function QRRead({ dialog }: props) {
   const [loading, setLoading] = useState(false)
   const [useScan, setUseScan] = useState(false)
   const navigate = useNavigate()
-  const dst = (usage === "trade") ? ("/trade/propose") : ("/load/confirm")
+  const dst = "/trade/propose"
 
   // 画像ファイルをcanvasで読み込んでQR解析
   const handleFile = async (file: File) => {
@@ -33,6 +33,7 @@ export default function QRRead({ usage }: props) {
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
         const code = jsQR(imageData.data, canvas.width, canvas.height)
         if (code) {
+          dialog.setOpen(false);
           navigate(dst, { state: { qr: code.data } })
         } else {
           toaster.create({ type: "error", title: "QRコードが見つかりません" })
@@ -56,39 +57,41 @@ export default function QRRead({ usage }: props) {
   const isNarrow = useIsNarrow();
   return (
     <Center>
-    <Stack>
-      <FileUpload.Root accept={["image/*"]}>
-        <FileUpload.HiddenInput onChange={handleChange} />
-        <FileUpload.Trigger asChild>
+      <Stack>
+        <FileUpload.Root accept={["image/*"]}>
+          <FileUpload.HiddenInput onChange={handleChange} />
+          <FileUpload.Trigger asChild>
+            <Button
+              variant="outline"
+              size="sm"
+              loading={loading}
+              width={isNarrow ? "70vw" : "40vw"}
+            >
+              <HiUpload /> ファイルのアップロード
+            </Button>
+          </FileUpload.Trigger>
+          <FileUpload.List />
+        </FileUpload.Root>
+        <div style={{ textAlign: "center" }}>
+          または
+        </div>
+        {useScan ? (
+          <Box height={"60vh"}>
+            <Scanner onScan={(result) => { navigate(dst, { state: { qr: result } }) }} />
+          </Box>
+        ) : (
           <Button
             variant="outline"
             size="sm"
             loading={loading}
             width={isNarrow ? "70vw" : "40vw"}
+            onClick={() => setUseScan(true)}
           >
-            <HiUpload /> ファイルのアップロード
+            <HiCamera /> カメラ起動
           </Button>
-        </FileUpload.Trigger>
-        <FileUpload.List />
-      </FileUpload.Root>
-      <Text>または</Text>
-      {useScan ? (
-        <Box height={"60vh"}>
-          <Scanner onScan={(result) => { navigate(dst, { state: { qr: result } }) }} />
-        </Box>
-      ) : (
-        <Button
-          variant="outline"
-          size="sm"
-          loading={loading}
-          width={isNarrow ? "70vw" : "40vw"}
-          onClick={() => setUseScan(true)}
-        >
-          <HiCamera /> カメラ起動
-        </Button>
-      )}
-      <Toaster />
-    </Stack>
+        )}
+        <Toaster />
+      </Stack>
     </Center>
   )
 }
