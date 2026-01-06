@@ -32,7 +32,6 @@ function GoodsElement({ card, updateCard, cardWidth }: GoodsProps) {
         <Button
           width={"30%"}
           variant="outline"
-          aspectRatio={1.5}
           background={"pink.200"}
           onClick={() => updateCard(card.id, { owned: card.owned - 1 })}
           disabled={card.owned === 0}
@@ -45,7 +44,6 @@ function GoodsElement({ card, updateCard, cardWidth }: GoodsProps) {
         <Button
           width={"30%"}
           variant="outline"
-          aspectRatio={1.5}
           background={"blue.200"}
           onClick={() =>
             updateCard(card.id, { owned: card.owned + 1 })
@@ -67,9 +65,8 @@ function GoodsElement({ card, updateCard, cardWidth }: GoodsProps) {
         <Button
           width={"30%"}
           variant="outline"
-          aspectRatio={1.5}
           onClick={() => updateCard(card.id, { want: card.want - 1 })}
-          disabled={card.want === 0}
+          disabled={card.want === 0 || card.unlimited}
         >
           -
         </Button>
@@ -79,7 +76,6 @@ function GoodsElement({ card, updateCard, cardWidth }: GoodsProps) {
         <Button
           width={"30%"}
           variant="outline"
-          aspectRatio={1.5}
           background={"green.200"}
           onClick={() => updateCard(card.id, { want: card.want + 1 })}
           disabled={card.want === 99 || card.unlimited}

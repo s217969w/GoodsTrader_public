@@ -7,6 +7,7 @@ import MatchingAlgorithm from "./MatchingAlgorithm";
 import { BiUser } from "react-icons/bi";
 import { BsQrCode } from "react-icons/bs";
 import { useIsNarrow } from "../../utils/useWindowSize";
+import SuggestBox from "./SuggestBox";
 
 
 export default function Propose() {
@@ -77,78 +78,16 @@ export default function Propose() {
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="user">
-          <Box
-            background={"pink.200"}
-            height={"60vh"}
-            p={5}
-            width={"80vw"}
-            overflowY={"auto"}
-          >
-            <Stack>
-              {
-                [3, 2, 1].map((star) => (
-                  <Stack key={star}>
-                    <Text>おすすめ度: {stars[star - 1]}</Text>
-                    <Grid gap={4}
-                      templateColumns={"repeat(3, 1fr)"}
-                      p={"2vw"}
-                      width={"70vw"}
-                    >
-                      {recommend?.give
-                        .filter((card) => card.priority === star)
-                        .map((card) => (
-                          <GridItem colSpan={1} key={card.id}>
-                            <Image
-                              alt={card.id}
-                              src={`/pic/cards/${card.id}.png`}
-                              width={"20vw"}
-                            />
-                          </GridItem>
-                        ))
-                      }
-                    </Grid>
-                  </Stack>
-                ))
-              }
-            </Stack>
-          </Box>
+          <SuggestBox
+            recommend={recommend?.give}
+            color="pink"
+          />
         </Tabs.Content>
         <Tabs.Content value="qr">
-          <Box
-            background={"blue.200"}
-            height={"60vh"}
-            p={5}
-            width={"80vw"}
-            overflowY={"auto"}
-          >
-            <Stack>
-              {
-                [3, 2, 1].map((star) => (
-                  <Stack key={star}>
-                    <Text>おすすめ度: {stars[star - 1]}</Text>
-                    <Grid gap={4}
-                      templateColumns={"repeat(3, 1fr)"}
-                      p={"2vw"}
-                      width={"70vw"}
-                    >
-                      {recommend?.take
-                        .filter((card) => card.priority === star)
-                        .map((card) => (
-                          <GridItem colSpan={1} key={card.id}>
-                            <Image
-                              alt={card.id}
-                              src={`/pic/cards/${card.id}.png`}
-                              width={"20vw"}
-                            />
-                          </GridItem>
-                        ))
-                      }
-                    </Grid>
-                  </Stack>
-                ))
-              }
-            </Stack>
-          </Box>
+          <SuggestBox
+            recommend={recommend?.take}
+            color="cyan"
+          />
         </Tabs.Content>
       </Tabs.Root >
     )
@@ -179,51 +118,7 @@ export default function Propose() {
             overflow: "hidden"
           }}>
             <div>あなたから:</div>
-            <div style={{
-              backgroundColor: "pink",
-              height: "100%",
-              width: "100%",
-              padding: "5px",
-              display: "flex",
-              flexDirection: "column",
-              overflow: "hidden"
-            }}
-            >
-
-              {
-                [3, 2, 1].map((star) => (
-                  <div key={star}>
-                    <div>おすすめ度: {stars[star - 1]}</div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        padding: '20px',
-                        gap: "10px",
-                        boxSizing: 'border-box',
-                        width: '100%'
-                      }}
-                    >
-                      {recommend?.give
-                        .filter((card) => card.priority === star)
-                        .map((card) => (
-                          <div style={{
-                            width: cardWidth,
-                            boxSizing: 'border-box',
-                            flex: `0 0 ${cardWidth}`
-                          }}>
-                            <img
-                              alt={card.id}
-                              src={`/pic/cards/${card.id}.png`}
-                            />
-                          </div>
-                        ))
-                      }
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
+            <SuggestBox recommend={recommend?.give} color="pink" />
           </div>
 
           <div style={{
@@ -233,51 +128,7 @@ export default function Propose() {
             flexDirection: "column"
           }}>
             <div>相手から:</div>
-            <div style={{
-              backgroundColor: "cyan",
-              height: "100%",
-              width: "100%",
-              padding: "5px",
-              display: "flex",
-              flexDirection: "column",
-              overflow: "auto"
-            }}
-            >
-
-              {
-                [3, 2, 1].map((star) => (
-                  <div key={star}>
-                    <div>おすすめ度: {stars[star - 1]}</div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        padding: '20px',
-                        gap: "10px",
-                        boxSizing: 'border-box',
-                        width: '100%'
-                      }}
-                    >
-                      {recommend?.take
-                        .filter((card) => card.priority === star)
-                        .map((card) => (
-                          <div style={{
-                            width: cardWidth,
-                            boxSizing: 'border-box',
-                            flex: `0 0 ${cardWidth}`
-                          }}>
-                            <img
-                              alt={card.id}
-                              src={`/pic/cards/${card.id}.png`}
-                            />
-                          </div>
-                        ))
-                      }
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
+            <SuggestBox recommend={recommend?.take} color="cyan" />
           </div>
         </div>
       </div >

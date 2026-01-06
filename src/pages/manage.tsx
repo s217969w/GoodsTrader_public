@@ -6,7 +6,6 @@ export default function Manage() {
   const isNarrow = useIsNarrow();
   return (
     <div style={{
-      height: "100vh-50px",
       overflow: "auto",
       backgroundColor: "#FFFFCC"
     }}>
