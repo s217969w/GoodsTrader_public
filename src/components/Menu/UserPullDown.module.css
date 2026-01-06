@@ -1,0 +1,45 @@
+.gnavi__lists {
+    position: absolute;
+}
+
+.gnavi__list:hover .dropdown__lists {
+    display: block;/*Gナビメニューにホバーしたら表示*/
+}
+.gnavi__list:hover {
+    background-color: rgb(15, 93, 238);
+}
+
+.dropdown__lists {
+    display: none;/*デフォルトでは非表示の状態にしておく*/
+    width: 100%;
+    position: absolute;
+    top: 70px;
+}
+.dropdown__list {
+    background-color:black;
+    height: 40px;
+    width: 100%;
+    transition: all .3s;
+    position: relative;
+}
+
+.dropdown__list:hover {
+    background-color: gray;
+}
+.dropdown__list a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    position: relative;
+}
+.dropdown__list a::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    right: 15px;
+    top: calc(50% - 5px);
+}

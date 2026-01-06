@@ -80,8 +80,7 @@ function DetailDrawer({ card, updateCard }: GoodsProps) {
         <Image
           alt={card.name}
           src={`/pic/cards/${card.id}.png`}
-          width={isNarrow ? "20vw" : ["120px", "9vw"]}
-          minWidth={isNarrow ? "50px" : "120px"}
+          width={isNarrow ? "20vw" : "100%"}
         />
       </Drawer.Trigger>
       <Portal>

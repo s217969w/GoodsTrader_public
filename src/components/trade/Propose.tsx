@@ -7,6 +7,7 @@ import MatchingAlgorithm from "./MatchingAlgorithm";
 import { BiUser } from "react-icons/bi";
 import { BsQrCode } from "react-icons/bs";
 import { useIsNarrow } from "../../utils/useWindowSize";
+import SuggestBox from "./SuggestBox";
 
 
 export default function Propose() {
@@ -16,6 +17,7 @@ export default function Propose() {
   let completeData: QRDataProp | null = null;
   let error = false;
   const stars = ["★", "★★", "★★★"]
+  const cardWidth = 70;
 
   try {
     if (location.state?.qr) {
@@ -34,7 +36,7 @@ export default function Propose() {
     error = true;
   }
 
-  if (error || completeData?.u === "L") {
+  if (error) {
     return (
       <Dialog.Root open={true}>
         <Portal>
@@ -46,7 +48,7 @@ export default function Propose() {
               </Dialog.Header>
               <Dialog.Body>
                 <p>
-                  QRコードを再度確認してください。交換用でないか、不正な形式です。
+                  不正な形式です。QRコードを再度確認してください。
                 </p>
               </Dialog.Body>
               <Dialog.Footer>
@@ -76,167 +78,60 @@ export default function Propose() {
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="user">
-          <Box
-            background={"pink.200"}
-            height={"60vh"}
-            p={5}
-            width={"80vw"}
-            overflowY={"auto"}
-          >
-            <Stack>
-              {
-                [3, 2, 1].map((star) => (
-                  <Stack key={star}>
-                    <Text>おすすめ度: {stars[star - 1]}</Text>
-                    <Grid gap={4}
-                      templateColumns={"repeat(3, 1fr)"}
-                      p={"2vw"}
-                      width={"70vw"}
-                    >
-                      {recommend?.give
-                        .filter((card) => card.priority === star)
-                        .map((card) => (
-                          <GridItem colSpan={1} key={card.id}>
-                            <Image
-                              alt={card.id}
-                              src={`/pic/cards/${card.id}.png`}
-                              width={"20vw"}
-                            />
-                          </GridItem>
-                        ))
-                      }
-                    </Grid>
-                  </Stack>
-                ))
-              }
-            </Stack>
-          </Box>
+          <SuggestBox
+            recommend={recommend?.give}
+            color="pink"
+          />
         </Tabs.Content>
         <Tabs.Content value="qr">
-          <Box
-            background={"blue.200"}
-            height={"60vh"}
-            p={5}
-            width={"80vw"}
-            overflowY={"auto"}
-          >
-            <Stack>
-              {
-                [3, 2, 1].map((star) => (
-                  <Stack key={star}>
-                    <Text>おすすめ度: {stars[star - 1]}</Text>
-                    <Grid gap={4}
-                      templateColumns={"repeat(3, 1fr)"}
-                      p={"2vw"}
-                      width={"70vw"}
-                    >
-                      {recommend?.take
-                        .filter((card) => card.priority === star)
-                        .map((card) => (
-                          <GridItem colSpan={1} key={card.id}>
-                            <Image
-                              alt={card.id}
-                              src={`/pic/cards/${card.id}.png`}
-                              width={"20vw"}
-                            />
-                          </GridItem>
-                        ))
-                      }
-                    </Grid>
-                  </Stack>
-                ))
-              }
-            </Stack>
-          </Box>
+          <SuggestBox
+            recommend={recommend?.take}
+            color="cyan"
+          />
         </Tabs.Content>
       </Tabs.Root >
     )
   } else {
     return (
-      <Stack>
-        <Text fontSize={{ base: "xl", md: "2xl" }} fontWeight={"bold"}>
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+        padding: "20px"
+      }}>
+        <h1>
           おすすめ交換
-        </Text>
-        <HStack>
-            <Stack>
-                あなたから:
-        <Box
-            background={"pink.200"}
-            height={"70vh"}
-            p={5}
-            width={"35vw"}
-            overflowY={"auto"}
-          >
-            <Stack>
-              {
-                [3, 2, 1].map((star) => (
-                  <Stack key={star}>
-                    <Text>おすすめ度: {stars[star - 1]}</Text>
-                    <Grid gap={4}
-                      templateColumns={"repeat(3, 1fr)"}
-                      p={"2vw"}
-                      width={"30vw"}
-                    >
-                      {recommend?.give
-                        .filter((card) => card.priority === star)
-                        .map((card) => (
-                          <GridItem colSpan={1} key={card.id}>
-                            <Image
-                              alt={card.id}
-                              src={`/pic/cards/${card.id}.png`}
-                              width={"8vw"}
-                            />
-                          </GridItem>
-                        ))
-                      }
-                    </Grid>
-                  </Stack>
-                ))
-              }
-            </Stack>
-          </Box>
-          </Stack>
-            <Image alt={"LR"} src="/pic/arrow/LR.png" width={"3vw"} />
-          <Stack>
-            相手から:
-          <Box
-            background={"blue.200"}
-            height={"70vh"}
-            p={5}
-            width={"35vw"}
-            overflowY={"auto"}
-          >
-            <Stack>
-              {
-                [3, 2, 1].map((star) => (
-                  <Stack key={star}>
-                    <Text>おすすめ度: {stars[star - 1]}</Text>
-                    <Grid gap={4}
-                      templateColumns={"repeat(3, 1fr)"}
-                      p={"2vw"}
-                      width={"30vw"}
-                    >
-                      {recommend?.take
-                        .filter((card) => card.priority === star)
-                        .map((card) => (
-                          <GridItem colSpan={1} key={card.id}>
-                            <Image
-                              alt={card.id}
-                              src={`/pic/cards/${card.id}.png`}
-                              width={"8vw"}
-                            />
-                          </GridItem>
-                        ))
-                      }
-                    </Grid>
-                  </Stack>
-                ))
-              }
-            </Stack>
-          </Box>
-          </Stack>
-              </HStack>
-      </Stack>
+        </h1>
+        <div style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "row",
+          gap: "30px"
+        }}>
+          <div style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden"
+          }}>
+            <div>あなたから:</div>
+            <SuggestBox recommend={recommend?.give} color="pink" />
+          </div>
+
+          <div style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column"
+          }}>
+            <div>相手から:</div>
+            <SuggestBox recommend={recommend?.take} color="cyan" />
+          </div>
+        </div>
+      </div >
     )
   }
 }

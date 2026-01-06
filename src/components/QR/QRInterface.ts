@@ -6,6 +6,5 @@ export interface ArrElement {
 }
 export interface QRDataProp {
   n: string,
-  u: string,
   c: (string | number)[][],
 }

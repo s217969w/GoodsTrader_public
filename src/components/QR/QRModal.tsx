@@ -1,12 +1,12 @@
-import { Button, Center, CloseButton, Dialog, Portal, QrCode, Stack, Text } from "@chakra-ui/react";
+import { Button, Center, CloseButton, Dialog, IconButton, Portal, QrCode, Stack, Text } from "@chakra-ui/react";
 import QRDataMake from "./QRDataMake";
-import {toPng} from "html-to-image"
+import { toPng } from "html-to-image"
 import { useRef } from "react";
 import { HiDownload } from "react-icons/hi";
+import { BsQrCode } from "react-icons/bs";
 
 interface formprop {
   name: string,
-  usage: string,
 }
 
 export default function QRModal(prop: formprop) {
@@ -14,7 +14,7 @@ export default function QRModal(prop: formprop) {
   const qrCodeRef = useRef<HTMLDivElement>(null);
 
   const handleDownload = async () => {
-    if(qrCodeRef.current === null) return;
+    if (qrCodeRef.current === null) return;
     try {
       const dataUrl = await toPng(qrCodeRef.current, {
         cacheBust: true, // キャッシュの問題を回避
@@ -32,48 +32,44 @@ export default function QRModal(prop: formprop) {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Button
-          variant={"solid"}
-          colorPalette={"blue"}
-          background={"blue.500"}
-          disabled={((prop.name === "") || (prop.usage === ""))}
-        >生成</Button>
+        <IconButton
+          variant={"ghost"}
+          background={"skyblue"}
+          height={"70px"}
+          width={"70px"}
+        >
+          <BsQrCode />
+        </IconButton>
       </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
           <Dialog.Content>
             <Dialog.Header>
-              <Dialog.Title> 生成完了 </Dialog.Title>
+              <Dialog.Title> {prop.name}のQRコード </Dialog.Title>
               <Dialog.CloseTrigger asChild>
                 <CloseButton size="sm" />
               </Dialog.CloseTrigger>
             </Dialog.Header>
             <Dialog.Body>
-              {
-                (prop.usage === "T") ? (
-                  <Text>
-                    このQRコードを交換相手に読み取ってもらうと、お互いのグッズをもとに
-                    交換方法を提示してくれます。
-                  </Text>) : (
-                  <Text>
-                    別の端末でこのコードを読み取ると、あなたのグッズ所持情報を引き継ぐことができます。
-                  </Text>)
-              }
-              {(prop.name && prop.usage && qrValue) ? (
+              <div>
+                このQRコードを交換相手に読み取ってもらうと、お互いのグッズをもとに
+                交換方法を提示してくれます。
+              </div>
+              {(prop.name && qrValue) ? (
                 <Stack>
-                <div ref={qrCodeRef}>
+                  <div ref={qrCodeRef}>
                     <Center>
-                <QrCode.Root value={qrValue} size={"xl"}>
-                  <QrCode.Frame style={{background: "white"}}>
-                    <QrCode.Pattern style={{fill: "black"}}/>
-                  </QrCode.Frame>
-                </QrCode.Root>
-                </Center>
-                </div>
-                <Button variant={"outline"} onClick={handleDownload}>
+                      <QrCode.Root value={qrValue} size={"xl"}>
+                        <QrCode.Frame style={{ background: "white" }}>
+                          <QrCode.Pattern style={{ fill: "black" }} />
+                        </QrCode.Frame>
+                      </QrCode.Root>
+                    </Center>
+                  </div>
+                  <Button variant={"outline"} onClick={handleDownload}>
                     <HiDownload /> ダウンロード
-                </Button>
+                  </Button>
                 </Stack>
               ) : (
                 <Text color="red.500">QRコードを生成できません。</Text>
