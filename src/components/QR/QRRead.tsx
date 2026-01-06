@@ -1,4 +1,4 @@
-import { Box, Button, Center, FileUpload, Stack, Text, UseDialogReturn } from "@chakra-ui/react"
+import { Box, Button, Center, FileUpload, Stack, UseDialogReturn } from "@chakra-ui/react"
 import { useState } from "react"
 import { HiCamera, HiUpload } from "react-icons/hi"
 import jsQR from "jsqr"
@@ -77,7 +77,10 @@ export default function QRRead({ dialog }: props) {
         </div>
         {useScan ? (
           <Box height={"60vh"}>
-            <Scanner onScan={(result) => { navigate(dst, { state: { qr: result } }) }} />
+            <Scanner onScan={(result) => {
+              dialog.setOpen(false);
+              navigate(dst, { state: { qr: result } });
+            }} />
           </Box>
         ) : (
           <Button

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./UserPullDown.module.css";
-import BsQuestionCircle from "react-icons/bs";
+import { BsQuestionCircle } from "react-icons/bs";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import TradeModal from "../trade/TradeModal";
 
@@ -34,8 +34,6 @@ function UserPullDown({ username }: PullDownProps) {
             <li className={styles.dropdown__list} onClick={() => setIsOpen(false)}>
               <TradeModal />
             </li>
-            <li className={styles.dropdown__list}><a href="/">メニュータイトル</a></li>
-            <li className={styles.dropdown__list}><a href="/">メニュータイトル</a></li>
             <li className={styles.dropdown__list}><a href="/about">
               <BsQuestionCircle />使い方
             </a></li>

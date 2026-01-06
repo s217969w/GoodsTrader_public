@@ -1,4 +1,4 @@
-import MdMail from "react-icons/md"
+import { MdMail } from "react-icons/md"
 import styles from "./TraderHeader.module.css";
 import { IconButton } from "@chakra-ui/react";
 import QRModal from "../QR/QRModal";

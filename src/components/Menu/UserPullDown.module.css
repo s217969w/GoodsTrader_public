@@ -2,7 +2,7 @@
     position: absolute;
 }
 
-.gnavi__list:on .dropdown__lists {
+.gnavi__list:hover .dropdown__lists {
     display: block;/*Gナビメニューにホバーしたら表示*/
 }
 .gnavi__list:hover {
