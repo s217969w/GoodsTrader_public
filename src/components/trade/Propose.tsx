@@ -44,7 +44,7 @@ export default function Propose() {
           <Dialog.Positioner>
             <Dialog.Content>
               <Dialog.Header>
-                <Dialog.Title>Dialog Title</Dialog.Title>
+                <Dialog.Title>読み込みエラー</Dialog.Title>
               </Dialog.Header>
               <Dialog.Body>
                 <p>
@@ -66,6 +66,13 @@ export default function Propose() {
     completeData ? MatchingAlgorithm(completeData) : null;
   if (isNarrow) {
     return (
+        <div style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+        padding: "20px"
+      }}>
       <Tabs.Root defaultValue={"user"}>
         <Tabs.List>
           <Tabs.Trigger value="user">
@@ -90,6 +97,7 @@ export default function Propose() {
           />
         </Tabs.Content>
       </Tabs.Root >
+      </div>
     )
   } else {
     return (

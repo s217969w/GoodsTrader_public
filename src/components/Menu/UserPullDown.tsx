@@ -3,23 +3,41 @@ import styles from "./UserPullDown.module.css";
 import { BsQuestionCircle } from "react-icons/bs";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import TradeModal from "../trade/TradeModal";
+import { useIsNarrow } from "../../utils/useWindowSize";
+import { MdMenu } from "react-icons/md";
+import { IconButton } from "@chakra-ui/react";
 
 interface PullDownProps {
   username: string;
+  menuH: string;
 }
 
-function UserPullDown({ username }: PullDownProps) {
+function UserPullDown({ username, menuH }: PullDownProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const isNarrow = useIsNarrow();
   return (
     <div style={{ width: "100%", textAlign: "center" }}>
       <ul className={styles.gnavi__lists}>
         <li className={styles.gnavi__list}
           onClick={() => { setIsOpen(!isOpen) }}>
-          <div style={{ display: "flex", height: "70px", padding: "10px" }}>
-            <div style={{ height: "70px", padding: "10px" }}>
+          {isNarrow ? (
+            <div style={{ display: "flex", height: menuH, padding: "10px" }}>
+            <IconButton
+                          variant={"plain"}
+                          height={menuH}
+                          width={menuH}
+                          background={"skyblue"}
+                          padding={"5px"}
+                        >
+                          <MdMenu />
+                        </IconButton>
+            </div>
+          ) : (
+            <div style={{ display: "flex", height: menuH, padding: "10px" }}>
+            <div style={{ height: menuH, padding: "10px" }}>
               {username}
             </div>
-            <div style={{ height: "70px", padding: "10px" }}>
+            <div style={{ height: menuH, padding: "10px" }}>
               {isOpen ? (
                 <BiSolidUpArrow height={"8px"} />
               ) : (
@@ -27,6 +45,8 @@ function UserPullDown({ username }: PullDownProps) {
               )}
             </div>
           </div>
+        )
+        }
           <ul
             className={styles.dropdown__lists}
             style={{ display: (isOpen ? "block" : "none") }}

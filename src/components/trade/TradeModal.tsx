@@ -24,7 +24,7 @@ export default function TradeModal() {
         <Dialog.Positioner>
           <Dialog.Content>
             <Dialog.Header>
-              <Dialog.Title> 交換 </Dialog.Title>
+              <Dialog.Title> QR読み込み </Dialog.Title>
               <Dialog.CloseTrigger asChild>
                 <CloseButton size="sm" />
               </Dialog.CloseTrigger>

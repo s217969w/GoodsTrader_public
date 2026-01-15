@@ -17,13 +17,21 @@ function App() {
   return (
     <>
       <ChakraProvider value={defaultSystem}>
+          <BrowserRouter>
         {isNarrow ? (
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <BrowserRouter>
-              <MobileHeader />
-              <Router />
-            </BrowserRouter>
-          </div>
+                <div style={{
+                    height: "100%",
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column"
+                }}>
+                    <div style={{height:"40px"}}>
+                        <TraderHeader />
+                    </div>
+                    <div style={{height:"calc(100vh - 40px)", width:"100vw", overflow: "auto"}}>
+                        <Router />
+                    </div>
+                </div>
         ) : (
           <div style={{
             display: "flex",
@@ -31,7 +39,6 @@ function App() {
             width: "100vw",
             height: "100vh"
           }}>
-              <BrowserRouter>
                 <div style={{ width: "50px", backgroundColor: "blue.50", overflow: "hidden" }}>
                   <SeriesSelector path='/src/data/series.json' />
                 </div>
@@ -43,10 +50,10 @@ function App() {
                     <Router />
                   </div>
                 </div>
-              </BrowserRouter>
             </div>
         )}
 
+        </BrowserRouter>
       </ChakraProvider >
     </>
   )
