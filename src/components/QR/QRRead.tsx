@@ -7,11 +7,12 @@ import { Toaster, toaster } from '../ui/toaster'
 import { Scanner } from "@yudiel/react-qr-scanner"
 import { useIsNarrow } from "../../utils/useWindowSize"
 
-interface props {
-  dialog: UseDialogReturn;
+interface qrReadprops {
+  setIsOpen: (open: boolean) => void;
 }
 
-export default function QRRead({ dialog }: props) {
+
+export default function QRRead({ setIsOpen }: qrReadprops) {
   const [loading, setLoading] = useState(false)
   const [useScan, setUseScan] = useState(false)
   const navigate = useNavigate()
@@ -33,7 +34,6 @@ export default function QRRead({ dialog }: props) {
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
         const code = jsQR(imageData.data, canvas.width, canvas.height)
         if (code) {
-          dialog.setOpen(false);
           navigate(dst, { state: { qr: code.data } })
         } else {
           toaster.create({ type: "error", title: "QRコードが見つかりません" })
@@ -52,6 +52,7 @@ export default function QRRead({ dialog }: props) {
     if (file && file.type.startsWith("image/")) {
       handleFile(file)
     }
+    setIsOpen(false)
   }
 
   const isNarrow = useIsNarrow();
@@ -78,7 +79,6 @@ export default function QRRead({ dialog }: props) {
         {useScan ? (
           <Box height={"60vh"}>
             <Scanner onScan={(result) => {
-              dialog.setOpen(false);
               navigate(dst, { state: { qr: result } });
             }} />
           </Box>
