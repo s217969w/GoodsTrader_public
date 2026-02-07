@@ -16,7 +16,9 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.1",
+    "@supabase/supabase-js": "^2.93.3",
     "@yudiel/react-qr-scanner": "^2.3.1",
+    "express": "^5.2.1",
     "framer-motion": "^12.23.12",
     "html-to-image": "^1.11.13",
     "jsqr": "^1.4.0",
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@types/express": "^5.0.6",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
@@ -36,6 +39,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "supabase": "^2.74.5",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5"

@@ -1,0 +1,108 @@
+- /get/series
+    - GET
+    - ユーザーのシリーズリストを受け取る
+    - 引数
+        - userID: string
+    - レスポンス
+        - 成功
+            - 200
+            - seriesList: seriesID[]
+        - ユーザーIDが存在しない
+            - 404
+            - {message: user does not exist.}
+
+- /get/table
+    - GET
+    - シリーズに対応するグッズリストを受け取る
+    - 引数
+        - seriesID: string
+    - レスポンス
+        - 成功
+            - 200
+            - itemList: itemID[]
+        - シリーズが存在しない
+            - 404
+            - {message: series does not exist.}
+        - そのシリーズを管理していない
+            - 404
+            - {message: the user does not have the series.}
+
+- /get/data
+    - GET
+    - ユーザーのシリーズリストを受け取る
+    - 必ず直前に`/get/table`を送信すること
+    - 引数
+        - userID: string
+        - seriesID: string
+    - レスポンス
+        - 成功
+            - 200
+            - data: manageData[]
+        - ユーザーIDが存在しない
+            - 404
+            - {message: user does not exist.}
+
+- /save
+    - POST
+    - ユーザーの変更を保存する
+    - 引数
+        - data: manageData[]
+        - userID: string
+    - レスポンス
+        - 成功
+            - 200
+            - {message: saved all changes.}
+        - ユーザーIDが存在しない
+            - 404
+            - {message: user does not exist.}
+
+- /QR/generate
+    - POST
+    - QRコード作成
+    - 引数
+        - userID: string
+        - seriesID: string
+    - レスポンス
+        - 成功
+            - 200
+            - {message: QR code had generated. QRkey: string}
+        - QRコードが既に存在
+            - 201
+            - {message: QR code is already exist. QRkey: string}
+        - ユーザーIDが存在しない
+            - 404
+            - {message: user does not exist.}
+        - シリーズIDが存在しない
+            - 404
+            - {message: series does not exist.}
+
+- /QR/read
+    - GET
+    - QRコード読取後、データの問い合わせ
+    - 引数
+        - QRkey: string
+    - レスポンス
+        - 成功
+            - 200
+            - userID: string
+            - username: string
+            - res: tradeRecommendationResult
+        - 不正なQRコード
+            - 404
+            - {message: invalid QR code.}
+
+- /request
+    - POST
+    - 交換リクエストの送信
+    - 引数
+        - QRkey: string
+        - give: file
+        - take: file
+    - レスポンス
+        - 成功
+            - 200
+            - {message: request successfully sent.}
+        - サーバーエラー
+            - 407
+            - {message: internal error.}
+
