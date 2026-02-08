@@ -17,13 +17,13 @@ export default function SuggestBox({ recommend, color }: prop) {
       padding: "5px",
       display: "flex",
       flexDirection: "column",
-      overflow: "hidden"
+      overflow: "auto"
     }}
     >
 
       {
         [3, 2, 1].map((star) => (
-          <div key={star}>
+          <div>
             <div>おすすめ度: {stars[star - 1]}</div>
             <div
               style={{
@@ -43,10 +43,18 @@ export default function SuggestBox({ recommend, color }: prop) {
                     boxSizing: 'border-box',
                     flex: `0 0 ${cardWidth}`
                   }}>
-                    <img
-                      alt={card.id}
-                      src={`/pic/cards/${card.id}.png`}
-                    />
+                    <div style={{
+                      padding: "5px",
+                      display: "flex",
+                      flexDirection: "column",
+                      overflow: "auto"
+                    }}>
+                      <img
+                        alt={card.id}
+                        src={`/pic/cards/${card.id}.png`}
+                      />
+                      {card.local}{(color === "pink" ? "⇒" : "⇐")}{card.qr}
+                    </div>
                   </div>
                 ))
               }

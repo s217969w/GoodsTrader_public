@@ -1,5 +1,6 @@
 .gnavi__lists {
     position: absolute;
+    height: 100%;
 }
 
 .gnavi__list:hover .dropdown__lists {

@@ -7,6 +7,7 @@ import { BsQrCode } from "react-icons/bs";
 
 interface formprop {
   name: string,
+  size: string
 }
 
 export default function QRModal(prop: formprop) {
@@ -35,8 +36,8 @@ export default function QRModal(prop: formprop) {
         <IconButton
           variant={"ghost"}
           background={"skyblue"}
-          height={"70px"}
-          width={"70px"}
+          height={prop.size}
+          width={prop.size}
         >
           <BsQrCode />
         </IconButton>

@@ -36,34 +36,34 @@ export default function MatchingAlgorithm(data : QRDataProp){
       // おすすめ度3: 無限回収
       if(l.unlimited && !q.unlimited) {
         if(q.owned - q.want > 0){
-          tradeList.take.push({id: card.id, priority: 3});
+          tradeList.take.push({id: card.id, priority: 3, local: l.owned, qr: q.owned});
           return;
         }
       }
       if(q.unlimited && !l.unlimited) {
         if(l.owned - l.want > 0){
-          tradeList.give.push({id: card.id, priority: 3});
+          tradeList.give.push({id: card.id, priority: 3, local: l.owned, qr: q.owned});
           return;
         }
       }
 
       //おすすめ度2: 需要供給のマッチ
       if(l.owned - l.want > 0 && q.want - q.owned > 0){
-        tradeList.give.push({id: card.id, priority: 2});
+        tradeList.give.push({id: card.id, priority: 2, local: l.owned, qr: q.owned});
         return;
       }
       if(q.owned - q.want > 0 && l.want - l.owned > 0){
-        tradeList.take.push({id: card.id, priority: 2});
+        tradeList.take.push({id: card.id, priority: 2, local: l.owned, qr: q.owned});
         return;
       }
 
       //おすすめ度1: 未所持と被り
       if(l.owned === 0 && q.owned > 1){
-        tradeList.take.push({id: card.id, priority: 1});
+        tradeList.take.push({id: card.id, priority: 1, local: l.owned, qr: q.owned});
         return;
       }
       if(q.owned === 0 && l.owned > 1){
-        tradeList.give.push({id: card.id, priority: 1});
+        tradeList.give.push({id: card.id, priority: 1, local: l.owned, qr: q.owned});
         return;
       }
     }
