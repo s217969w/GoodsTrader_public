@@ -10,7 +10,7 @@ function TraderHeader() {
   const username = "negi";
   const isNarrow = useIsNarrow();
   const iconsize = (isNarrow ? "40px" : "70px")
-  const menuW = (isNarrow ? "40px" : "100px")
+  const menuW = (isNarrow ? "40px" : "120px")
   return (
     <div className={styles.TraderHeader}>
       <div className={styles.header_inner}>
