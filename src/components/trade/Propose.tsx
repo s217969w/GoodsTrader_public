@@ -8,6 +8,7 @@ import { BiUser } from "react-icons/bi";
 import { BsQrCode } from "react-icons/bs";
 import { useIsNarrow } from "../../utils/useWindowSize";
 import SuggestBox from "./SuggestBox";
+import { useState } from "react";
 
 
 export default function Propose() {
@@ -44,7 +45,7 @@ export default function Propose() {
           <Dialog.Positioner>
             <Dialog.Content>
               <Dialog.Header>
-                <Dialog.Title>Dialog Title</Dialog.Title>
+                <Dialog.Title>読み込みエラー</Dialog.Title>
               </Dialog.Header>
               <Dialog.Body>
                 <p>
@@ -65,33 +66,7 @@ export default function Propose() {
   const recommend: tradeRecommendationResult | null =
     completeData ? MatchingAlgorithm(completeData) : null;
   if (isNarrow) {
-    return (
-      <Tabs.Root defaultValue={"user"}>
-        <Tabs.List>
-          <Tabs.Trigger value="user">
-            <BiUser />
-            <Text>あなたから</Text>
-          </Tabs.Trigger>
-          <Tabs.Trigger value="qr">
-            <BsQrCode />
-            <Text>相手から</Text>
-          </Tabs.Trigger>
-        </Tabs.List>
-        <Tabs.Content value="user">
-          <SuggestBox
-            recommend={recommend?.give}
-            color="pink"
-          />
-        </Tabs.Content>
-        <Tabs.Content value="qr">
-          <SuggestBox
-            recommend={recommend?.take}
-            color="cyan"
-          />
-        </Tabs.Content>
-      </Tabs.Root >
-    )
-  } else {
+    const [activeTab, setActiveTab] = useState<'user' | 'qr'>('user');
     return (
       <div style={{
         display: "flex",
@@ -99,6 +74,79 @@ export default function Propose() {
         height: "100%",
         width: "100%",
         padding: "20px"
+      }}>
+        <div style={{ display: "flex", marginBottom: "16px" }}>
+          <button
+            style={{
+              flex: 1,
+              padding: "8px",
+              background: activeTab === 'user' ? '#f8bbd0' : '#eee',
+              border: "none",
+              borderRadius: "8px 0 0 8px",
+              cursor: "pointer"
+            }}
+            onClick={() => setActiveTab('user')}
+          >
+            <BiUser style={{ verticalAlign: "middle", marginRight: "4px" }} />
+            あなたから
+          </button>
+          <button
+            style={{
+              flex: 1,
+              padding: "8px",
+              background: activeTab === 'qr' ? '#b2ebf2' : '#eee',
+              border: "none",
+              borderRadius: "0 8px 8px 0",
+              cursor: "pointer"
+            }}
+            onClick={() => setActiveTab('qr')}
+          >
+            <BsQrCode style={{ verticalAlign: "middle", marginRight: "4px" }} />
+            相手から
+          </button>
+        </div>
+        <div style={{ flex: 1, height: "80%" }}>
+          {activeTab === 'user' ? (
+            <SuggestBox recommend={recommend?.give} color="pink" />
+          ) : (
+            <SuggestBox recommend={recommend?.take} color="cyan" />
+          )}
+        </div>
+        <div style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          margin: "0 auto",
+          gap: "5px"
+        }}>
+          <button
+            style={{
+              width: "200px",
+              textAlign: "center",
+              marginTop: "24px",
+              backgroundColor: "skyblue"
+            }}
+          >交換リクエスト</button>
+          <button
+            style={{
+              width: "200px",
+              textAlign: "center",
+              marginTop: "24px",
+              backgroundColor: "lightgray"
+            }}
+          >リセット</button>
+        </div >
+      </div>
+    );
+  } else {
+    return (
+      <div style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "80%",
+        width: "100%",
+        padding: "20px",
+        gap: "10px"
       }}>
         <h1>
           おすすめ交換
@@ -115,23 +163,49 @@ export default function Propose() {
             height: "100%",
             display: "flex",
             flexDirection: "column",
-            overflow: "hidden"
           }}>
             <div>あなたから:</div>
-            <SuggestBox recommend={recommend?.give} color="pink" />
+            <div style={{ height: "100%", overflow: "hidden" }}>
+              <SuggestBox recommend={recommend?.give} color="pink" />
+            </div>
           </div>
 
           <div style={{
             width: "100%",
             height: "100%",
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
           }}>
             <div>相手から:</div>
-            <SuggestBox recommend={recommend?.take} color="cyan" />
+            <div style={{ height: "100%", overflow: "hidden" }}>
+              <SuggestBox recommend={recommend?.take} color="cyan" />
+            </div>
           </div>
         </div>
-      </div >
+        <div style={{
+          display: "flex",
+          flexDirection: "row",
+          margin: "0 auto",
+          gap: "5px"
+        }}>
+          <button
+            style={{
+              width: "200px",
+              textAlign: "center",
+              marginTop: "24px",
+              backgroundColor: "skyblue"
+            }}
+          >交換リクエスト</button>
+          <button
+            style={{
+              width: "200px",
+              textAlign: "center",
+              marginTop: "24px",
+              backgroundColor: "lightgray"
+            }}
+          >リセット</button>
+        </div >
+      </div>
     )
   }
 }

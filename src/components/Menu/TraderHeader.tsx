@@ -4,9 +4,13 @@ import { IconButton } from "@chakra-ui/react";
 import QRModal from "../QR/QRModal";
 import { Link } from "react-router-dom";
 import UserPullDown from "./UserPullDown";
+import { useIsNarrow } from "../../utils/useWindowSize";
 
 function TraderHeader() {
   const username = "negi";
+  const isNarrow = useIsNarrow();
+  const iconsize = (isNarrow ? "40px" : "70px")
+  const menuW = (isNarrow ? "40px" : "120px")
   return (
     <div className={styles.TraderHeader}>
       <div className={styles.header_inner}>
@@ -26,22 +30,22 @@ function TraderHeader() {
           display: "flex",
           alignItems: "center",
         }}>
-          <div style={{ width: "70px", height: "70px" }}>
+          <div style={{ width: iconsize, height: iconsize }}>
             <IconButton
               variant={"plain"}
-              height={"70px"}
-              width={"70px"}
+              height={iconsize}
+              width={iconsize}
               background={"skyblue"}
               padding={"5px"}
             >
               <MdMail />
             </IconButton>
           </div>
-          <div style={{ width: "70px", height: "70px" }}>
-            <QRModal name={username} />
+          <div style={{ width: iconsize, height: iconsize }}>
+            <QRModal name={username} size={iconsize}/>
           </div>
-          <div style={{ width: "100px", height: "70px" }}>
-            <UserPullDown username={username} />
+          <div style={{ width: menuW, height: iconsize }}>
+            <UserPullDown username={username} menuH={iconsize} />
           </div>
         </p>
       </div>

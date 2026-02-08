@@ -2,6 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { useCards } from '../../utils/storage.ts';
 import type { CardInfo } from '../../data/cardinfo.ts';
 import MobileElement from './MobileElement.tsx';
+import { useWindowSize } from '../../utils/useWindowSize.ts';
 
 export function MobileList() {
 
@@ -13,18 +14,33 @@ export function MobileList() {
       card.id === id ? { ...card, ...updates } : card);
     saveCards(updated);
   }
+  const { width } = useWindowSize();
+    const col = 3;
+    const pad = 20;
+    const cardWidth = (width - pad * 2) / col;
   return (
-    <Grid gap={4}
-      templateColumns={"repeat(3, 1fr)"}
-      p={"2vw"}
-      width={"80vw"}
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        padding: pad,
+        boxSizing: 'border-box',
+        width: '100%',
+      }}
     >
       {cards.map((card) => (
-        <GridItem colSpan={1} key={card.id}>
+        <div key={card.id}
+          style={{
+            width: cardWidth,
+            boxSizing: 'border-box',
+            flex: `0 0 ${cardWidth}`,
+            padding: "2px"
+          }}
+        >
           <MobileElement card={card} updateCard={updateCard} />
-        </GridItem>
+        </div>
       ))}
-    </Grid>
+    </div>
   )
 }
 
