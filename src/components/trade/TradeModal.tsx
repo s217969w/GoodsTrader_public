@@ -1,6 +1,7 @@
 import React from "react";
 import QRRead from "../QR/QRRead";
 import { BsQrCode } from "react-icons/bs";
+import { CloseButton } from "@chakra-ui/react";
 
 interface TradeModalProps {
   isOpen: boolean;
@@ -46,7 +47,7 @@ export default function TradeModal({ isOpen, setIsOpen }: TradeModalProps) {
               padding: "4px"
             }}
             aria-label="閉じる"
-          >×</button>
+          ><CloseButton /></button>
         </div>
         <div style={{ margin: "16px 0", textAlign: "center" }}>
           QRコードの画像ファイルをアップロードするか、<br />
